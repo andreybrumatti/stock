@@ -15,7 +15,19 @@ public class Product {
     private OffsetDateTime createdAt;
     private OffsetDateTime updatedAt;
 
-    public Product(UUID id, String name, String description, BigDecimal unitPrice, Integer currentStock) {
+    private Product(UUID id, String name, String description, BigDecimal unitPrice, Integer currentStock,
+                   OffsetDateTime createdAt, OffsetDateTime updatedAt) {
+
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.unitPrice = unitPrice;
+        this.currentStock = currentStock;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public static Product create(String name, String description, BigDecimal unitPrice, Integer currentStock) {
 
         if (unitPrice.compareTo(BigDecimal.ZERO) <= 0) {
             throw invalidUnitPriceException(unitPrice);
@@ -23,14 +35,36 @@ public class Product {
         if (currentStock < 0) {
             throw invalidStockQuantityException(currentStock);
         }
+        if (name == null || name.isBlank()) {
+            throw invalidProductNameException(name);
+        }
 
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.unitPrice = unitPrice;
-        this.currentStock = currentStock;
-        this.createdAt = OffsetDateTime.now();
-        this.updatedAt = OffsetDateTime.now();
+        if (description == null || description.isBlank()) {
+            throw invalidProductDescriptionException(description);
+        }
+
+        OffsetDateTime now = OffsetDateTime.now();
+        return new Product(
+                UUID.randomUUID(),
+                name,
+                description,
+                unitPrice,
+                currentStock,
+                now,
+                now
+        );
+    }
+
+    public static Product fromEntity(UUID id, String name, String description, BigDecimal unitPrice, Integer currentStock, OffsetDateTime createdAt, OffsetDateTime updatedAt){
+        return new Product(
+                id,
+                name,
+                description,
+                unitPrice,
+                currentStock,
+                createdAt,
+                updatedAt
+        );
     }
 
     public void updateUnitPrice(BigDecimal unitPrice) {
