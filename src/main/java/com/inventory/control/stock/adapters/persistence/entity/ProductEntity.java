@@ -1,5 +1,6 @@
 package com.inventory.control.stock.adapters.persistence.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Id;
@@ -29,6 +30,7 @@ public class ProductEntity {
     private UUID id;
 
     @NotBlank @Size(max = 100)
+    @Column(unique = true)
     private String name;
 
     @NotBlank @Size(max = 255)
