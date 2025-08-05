@@ -1,8 +1,8 @@
-package com.inventory.control.stock.infrastructure.controller.dto;
+package com.inventory.control.stock.infrastructure.controller.dto.product;
 
 import java.math.BigDecimal;
 
-public record ProductResponseDTO(
+public record ProductResquestDTO(
         String name,
         String description,
         BigDecimal unitPrice,

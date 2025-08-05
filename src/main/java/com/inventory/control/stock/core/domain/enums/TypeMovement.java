@@ -22,6 +22,6 @@ public enum TypeMovement {
                 return type;
             }
         }
-        throw invalidTypeMovementException(value);
+        throw invalidTypeMovementException(TypeMovement.valueOf(value));
     }
 }
