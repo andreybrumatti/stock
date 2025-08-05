@@ -1,4 +1,4 @@
-package com.inventory.control.stock.application.service;
+package com.inventory.control.stock.application.service.product;
 
 import com.inventory.control.stock.application.usecase.product.command.CreateProductCommand;
 import com.inventory.control.stock.application.usecase.product.CreateProductUseCase;

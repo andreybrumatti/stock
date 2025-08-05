@@ -6,6 +6,7 @@ import com.inventory.control.stock.adapters.persistence.repository.jpa.ProductRe
 import com.inventory.control.stock.core.domain.model.Product;
 import com.inventory.control.stock.core.domain.repository.ProductRepository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -31,5 +32,13 @@ public class ProductRepositoryJpaImpl implements ProductRepository {
     public Optional<Product> findById(UUID productId) {
         return productRepositoryJpa.findById(productId)
                 .map(productMapper::toDomain);
+    }
+
+    @Override
+    public List<Product> findAll() {
+        List<ProductEntity> listEntity = productRepositoryJpa.findAll();
+        return listEntity.stream()
+                .map(productMapper::toDomain)
+                .toList();
     }
 }

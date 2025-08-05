@@ -1,8 +1,10 @@
-package com.inventory.control.stock.application.service;
+package com.inventory.control.stock.application.service.stockMovement;
 
 import com.inventory.control.stock.application.usecase.stockMovement.IncreaseStockProductUseCase;
-import com.inventory.control.stock.application.usecase.stockMovement.command.IncreaseStockCommand;
+import com.inventory.control.stock.application.usecase.stockMovement.command.MovementStockCommand;
+import com.inventory.control.stock.core.domain.enums.TypeMovement;
 import com.inventory.control.stock.core.domain.exception.ProductException;
+import com.inventory.control.stock.core.domain.exception.TypeMovementException;
 import com.inventory.control.stock.core.domain.model.Product;
 import com.inventory.control.stock.core.domain.model.StockMovement;
 import com.inventory.control.stock.core.domain.repository.ProductRepository;
@@ -23,14 +25,21 @@ public class IncreaseStockProductService implements IncreaseStockProductUseCase 
 
     @Override
     @Transactional
-    public StockMovement increaseStock(UUID productId, IncreaseStockCommand increaseStockCommand) {
+    public StockMovement increaseStock(UUID productId, MovementStockCommand movementStockCommand) {
+
+        TypeMovement typeMovement = movementStockCommand.typeMovement();
+
+        if (typeMovement != TypeMovement.IN) {
+            throw TypeMovementException.invalidTypeMovementException(typeMovement);
+        }
+
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> ProductException.productNotFoundException(productId));
 
-        product.increaseStock(increaseStockCommand.quantity());
+        product.increaseStock(movementStockCommand.quantity());
 
         StockMovement stockMovement = StockMovement.create(
-                increaseStockCommand.typeMovement(),
+                movementStockCommand.typeMovement(),
                 product
         );
 

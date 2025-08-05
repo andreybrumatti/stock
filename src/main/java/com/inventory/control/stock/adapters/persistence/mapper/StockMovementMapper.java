@@ -1,10 +1,10 @@
 package com.inventory.control.stock.adapters.persistence.mapper;
 
 import com.inventory.control.stock.adapters.persistence.entity.StockMovementEntity;
-import com.inventory.control.stock.application.usecase.stockMovement.command.IncreaseStockCommand;
+import com.inventory.control.stock.application.usecase.stockMovement.command.MovementStockCommand;
 import com.inventory.control.stock.core.domain.model.StockMovement;
-import com.inventory.control.stock.infrastructure.controller.dto.IncreaseStockRequestDTO;
-import com.inventory.control.stock.infrastructure.controller.dto.IncreaseStockResponseDTO;
+import com.inventory.control.stock.infrastructure.controller.dto.stockMovement.MovementStockRequestDTO;
+import com.inventory.control.stock.infrastructure.controller.dto.stockMovement.MovementStockResponseDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -16,8 +16,9 @@ public interface StockMovementMapper {
     @Mapping(target = "productEntity", source = "product")
     StockMovementEntity toEntity(StockMovement stockMovement);
 
-    IncreaseStockCommand toCommand(IncreaseStockRequestDTO increaseStockRequestDTO);
+    MovementStockCommand toCommand(MovementStockRequestDTO movementStockRequestDTO);
 
     @Mapping(target = "name", source = "product.name")
-    IncreaseStockResponseDTO toResponseDTO(StockMovement stockMovement);
+    @Mapping(target = "quantity", source = "product.currentStock")
+    MovementStockResponseDTO toResponseDTO(StockMovement stockMovement);
 }

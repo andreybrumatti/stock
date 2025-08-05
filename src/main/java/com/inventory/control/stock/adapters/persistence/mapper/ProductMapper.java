@@ -2,8 +2,8 @@ package com.inventory.control.stock.adapters.persistence.mapper;
 
 import com.inventory.control.stock.application.usecase.product.command.CreateProductCommand;
 import com.inventory.control.stock.core.domain.model.Product;
-import com.inventory.control.stock.infrastructure.controller.dto.ProductResponseDTO;
-import com.inventory.control.stock.infrastructure.controller.dto.ProductResquestDTO;
+import com.inventory.control.stock.infrastructure.controller.dto.product.ProductResponseDTO;
+import com.inventory.control.stock.infrastructure.controller.dto.product.ProductResquestDTO;
 import com.inventory.control.stock.adapters.persistence.entity.ProductEntity;
 import org.mapstruct.Mapper;
 
