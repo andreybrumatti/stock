@@ -1,6 +1,9 @@
 package com.inventory.control.stock.core.domain.exception;
 
+import com.inventory.control.stock.core.domain.repository.ProductRepository;
+
 import java.math.BigDecimal;
+import java.util.UUID;
 
 public class ProductException extends RuntimeException{
     public ProductException(String message) {
@@ -25,5 +28,9 @@ public class ProductException extends RuntimeException{
 
     public static ProductException invalidProductDescriptionException(String description) {
         return new ProductException("Product description cannot be null or empty: " + description);
+    }
+
+    public static ProductException productNotFoundException(UUID id) {
+        return new ProductException("Product not found with id: " + id);
     }
 }

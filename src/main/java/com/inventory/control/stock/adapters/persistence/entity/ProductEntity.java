@@ -19,7 +19,6 @@ import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Entity
-@EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
 @AllArgsConstructor

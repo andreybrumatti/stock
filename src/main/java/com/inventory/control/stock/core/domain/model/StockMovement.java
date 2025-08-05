@@ -7,21 +7,41 @@ import java.util.UUID;
 
 public class StockMovement {
     private UUID id;
+    private Product product;
     private TypeMovement typeMovement;
     private OffsetDateTime movementDate;
 
-    public StockMovement(TypeMovement typeMovement, OffsetDateTime movementDate) {
+    public StockMovement(UUID id, Product product, TypeMovement typeMovement, OffsetDateTime movementDate) {
+        this.id = id;
+        this.product = product;
         this.typeMovement = typeMovement;
         this.movementDate = movementDate;
     }
 
-    public void updateStockMovement(String typeMovement) {
-        this.typeMovement = TypeMovement.fromValue(typeMovement);
-        this.movementDate = OffsetDateTime.now();
+    public static StockMovement create(TypeMovement typeMovement, Product product){
+        return new StockMovement(
+                UUID.randomUUID(),
+                product,
+                typeMovement,
+                OffsetDateTime.now()
+        );
+    }
+
+    public static StockMovement fromEntity(UUID id,Product product, TypeMovement typeMovement, OffsetDateTime movementDate) {
+        return new StockMovement(
+                id,
+                product,
+                typeMovement,
+                movementDate
+        );
     }
 
     public UUID getId() {
         return id;
+    }
+
+    public Product getProduct() {
+        return product;
     }
 
     public TypeMovement getTypeMovement() {

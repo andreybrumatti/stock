@@ -1,9 +1,10 @@
 package com.inventory.control.stock.application.service;
 
+import com.inventory.control.stock.application.usecase.product.command.CreateProductCommand;
 import com.inventory.control.stock.application.usecase.product.CreateProductUseCase;
-import com.inventory.control.stock.application.usecase.product.ProductCommand;
 import com.inventory.control.stock.core.domain.model.Product;
 import com.inventory.control.stock.core.domain.repository.ProductRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 public class CreateProductService implements CreateProductUseCase {
 
@@ -14,13 +15,14 @@ public class CreateProductService implements CreateProductUseCase {
     }
 
     @Override
-    public Product create(ProductCommand productCommand) {
+    @Transactional
+    public Product create(CreateProductCommand createProductCommand) {
 
         Product product = Product.create(
-                productCommand.name(),
-                productCommand.description(),
-                productCommand.unitPrice(),
-                productCommand.currentStock()
+                createProductCommand.name(),
+                createProductCommand.description(),
+                createProductCommand.unitPrice(),
+                createProductCommand.currentStock()
         );
         return productRepository.save(product);
     }
