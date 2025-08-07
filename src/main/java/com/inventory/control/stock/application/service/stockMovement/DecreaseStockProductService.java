@@ -9,6 +9,7 @@ import com.inventory.control.stock.core.domain.model.Product;
 import com.inventory.control.stock.core.domain.model.StockMovement;
 import com.inventory.control.stock.core.domain.repository.ProductRepository;
 import com.inventory.control.stock.core.domain.repository.StockMovementRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -23,6 +24,7 @@ public class DecreaseStockProductService implements DecreaseStockProductUseCase 
     }
 
     @Override
+    @Transactional
     public StockMovement decreaseStock(UUID productId, MovementStockCommand movementStockCommand) throws TypeMovementException {
 
         TypeMovement typeMovement = movementStockCommand.typeMovement();
