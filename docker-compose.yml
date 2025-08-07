@@ -1,6 +1,17 @@
 version: '3.8'
 
 services:
+  backend:
+    image: andreybrumatti/stock-backend:3.0
+    container_name: stock-backend
+    ports:
+      - "8082:8082"
+    networks:
+      - stock-network
+    depends_on:
+      - pgadmin
+      - postgres
+
   postgres:
     image: bitnami/postgresql:latest
     container_name: inventory_control
@@ -11,7 +22,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - stock_postgres_data:/var/lib/postgresql/data
     networks:
       - stock-network
 
@@ -22,14 +33,14 @@ services:
       PGADMIN_DEFAULT_EMAIL: admin@stock.com
       PGADMIN_DEFAULT_PASSWORD: admin123
     ports:
-      - "8081:80"
+      - "8081:8081"
     depends_on:
       - postgres
     networks:
       - stock-network
 
 volumes:
-  postgres_data:
+  stock_postgres_data:
 
 networks:
   stock-network:
