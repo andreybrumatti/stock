@@ -46,7 +46,7 @@ Certifique-se de ter o **Docker** e o **Docker Compose** instalados.
 
 1.  **Clone o repositório e navegue até a pasta:**
     ```bash
-    git clone [https://github.com/seu-usuario/stock-control.git](https://github.com/seu-usuario/stock-control.git)
+    git clone https://github.com/andreybrumatti/stock.git
     cd stock-control
     ```
 
@@ -63,7 +63,7 @@ Certifique-se de ter o **Java 21**, **Maven 3.8+** e o **PostgreSQL** instalados
 
 1.  **Clone o repositório e navegue até a pasta:**
     ```bash
-    git clone [https://github.com/seu-usuario/stock-control.git](https://github.com/seu-usuario/stock-control.git)
+    git clone https://github.com/andreybrumatti/stock.git
     cd stock-control
     ```
 
